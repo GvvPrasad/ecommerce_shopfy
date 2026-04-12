@@ -1,13 +1,9 @@
-import { test, expect } from '@playwright/test';
-import { poManger } from '../../objectrespo/pomanager';
+import { test, expect } from '../../fixtures/baseFixture';
 import { readExcel } from '../../utils/excelUtil';
 
 
 
-test('navigative to login page', async ({ page }) => {
-
-  // Initialize page objects
-  const pomanager = new poManger(page);
+test('navigative to login page', async ({ page, pomanager }) => {
 
   //get data from excel
   const testdata = readExcel(pomanager.gobleobjects.excelFilePath, pomanager.gobleobjects.loginsheet);
