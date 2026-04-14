@@ -1,11 +1,16 @@
 import { test, expect } from '../../fixtures/baseFixture';
 import { readExcel } from '../../utils/excelUtil';
+import { ENV_CONFIG } from '../../env/env';
 
+test.use({ baseURL: ENV_CONFIG.baseURL });
 
+test.describe('User registration',()=>{
 
-test('navigative to login page', async ({ page, pomanager }) => {
+  test.describe('new user',()=>{
 
-  //get data from excel
+    test('valid user, @somke', async({page,pomanager})=>{
+
+      //get data from excel
   const testdata = readExcel(pomanager.gobleobjects.excelFilePath, pomanager.gobleobjects.loginsheet);
 
   //
@@ -25,12 +30,6 @@ test('navigative to login page', async ({ page, pomanager }) => {
     await expect(pomanager.registerpage.successMessage).toBeVisible();
   }
 
-
-  
-
-  
-
- 
-
-
+    });
+  });
 });

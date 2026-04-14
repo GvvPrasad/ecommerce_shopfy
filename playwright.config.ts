@@ -1,15 +1,15 @@
 import { defineConfig, devices } from '@playwright/test';
-import * as dotenv from 'dotenv';
-import * as path from 'path';
-
+// import * as dotenv from 'dotenv';
+// import * as path from 'path';
+import { ENV_CONFIG } from './env/env'
 
 // Load env file based on ENV variable passed via CLI
-const envFile = process.env.ENV ? `.env.${process.env.ENV}` : '.env.qa';
-dotenv.config({ path: path.resolve(__dirname,'env', envFile) });
+// const envFile = process.env.ENV ? `.env.${process.env.ENV}` : '.env.qa';
+// dotenv.config({ path: path.resolve(__dirname,'env', envFile) });
 
-// Sanitize: strip any accidental surrounding quotes
-const baseURL = process.env.BASE_URL?.replace(/^['"]|['"]$/g, '');
-console.log(`Running tests against: ${baseURL}`);
+// // Sanitize: strip any accidental surrounding quotes
+// const baseURL = process.env.BASE_URL?.replace(/^['"]|['"]$/g, '');
+// console.log(`Running tests against: ${baseURL}`);
 
 
 export default defineConfig({
@@ -45,7 +45,7 @@ export default defineConfig({
   use: {
 
      // get base url from config file
-    baseURL: baseURL,
+    baseURL: ENV_CONFIG.baseURL,
 
     //for max window size
     viewport: {width:1920,height:1080},
