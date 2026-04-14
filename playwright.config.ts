@@ -30,7 +30,11 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
 
   // playwright reports
-  reporter: 'html',
+  reporter: [
+    ['html'],
+    ["line"], ["allure-playwright"]
+  ],
+  
 
   // Folder for test artifacts such as screenshots, videos, traces, etc.
   outputDir: 'test-results',

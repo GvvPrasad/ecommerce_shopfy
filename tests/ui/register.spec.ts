@@ -1,9 +1,12 @@
 import { test, expect } from '../../fixtures/baseFixture';
 import { readExcel } from '../../utils/excelUtil';
-
+import * as allure from 'allure-js-commons';
 
 
 test('navigative to login page', async ({ page, pomanager }) => {
+
+await allure.feature('Authentication');
+  await allure.story('Valid Login');
 
   //get data from excel
   const testdata = readExcel(pomanager.gobleobjects.excelFilePath, pomanager.gobleobjects.loginsheet);
