@@ -15,7 +15,7 @@ export const test = base.extend<MyFixture>({
         await use(pomanager)
     },
 
-    // ✅ Extend page fixture to inject Allure globally
+    // Extend page fixture to inject Allure globally
   page: async ({ page }, use, testInfo) => {
 
     // 🔹 Apply auto-mapped metadata (Epic / Feature / Story / Tags)
