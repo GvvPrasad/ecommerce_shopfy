@@ -38,7 +38,7 @@ export default defineConfig({
     viewport: {width:1920,height:1080},
 
     //test mode
-    headless: true,
+    headless: false,
 
     // Collect trace when retrying the failed test
     trace: 'retain-on-failure',
