@@ -16,6 +16,7 @@ test.describe('User registration',()=>{
   //
   for(const data of testdata as any[]){
     await pomanager.header.lanchApp();
+    console.log('test');
     await pomanager.header.goToLogin();
     await pomanager.signuppage.userSignUp(data.Name, data.Email);
     await expect(page).toHaveURL('/signup')
