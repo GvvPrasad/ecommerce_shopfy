@@ -4,14 +4,13 @@ import { ENV_CONFIG } from '../../env/env';
 
 export class AllureUtils {
 
-  /**
-   * Add dynamic environment details to Allure report
-   */
+  // Add dynamic environment details to Allure report
+   
   static async addEnvironmentDetails() {
     const testInfo = test.info();
 
-    await allure.label('environment', ENV_CONFIG.env);
-    await allure.label('baseURL', ENV_CONFIG.baseURL);
+    await allure.label('environment', ENV_CONFIG.ENV);
+    await allure.label('baseURL', ENV_CONFIG.BASE_URL);
 
     // Browser from Playwright project
     await allure.label('browser', testInfo.project.name);
