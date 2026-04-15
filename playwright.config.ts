@@ -51,7 +51,7 @@ export default defineConfig({
     viewport: {width:1920,height:1080},
 
     //test mode
-    headless: false,
+    headless: true,
 
    
 
