@@ -3,7 +3,7 @@ import { readExcel } from '../../utils/excelUtil';
 
 
 
-test('navigative to login page', async ({ page, pomanager }) => {
+test.skip('navigative to login page', async ({ page, pomanager }) => {
 
   //get data from excel
   const testdata = readExcel(pomanager.gobleobjects.excelFilePath, pomanager.gobleobjects.loginsheet);
@@ -24,13 +24,4 @@ test('navigative to login page', async ({ page, pomanager }) => {
     await pomanager.registerpage.accountCreation();
     await expect(pomanager.registerpage.successMessage).toBeVisible();
   }
-
-
-  
-
-  
-
- 
-
-
 });

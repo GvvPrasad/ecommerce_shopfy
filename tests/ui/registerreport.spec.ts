@@ -1,35 +1,35 @@
 import { test, expect } from '../../fixtures/baseFixture';
 import { readExcel } from '../../utils/excelUtil';
-import { ENV_CONFIG } from '../../env/env';
+//import { ENV_CONFIG } from '../../env/env';
 
-test.use({ baseURL: ENV_CONFIG.baseURL });
+//test.use({ baseURL: ENV_CONFIG.baseURL });
 
-test.describe('User registration',()=>{
+test.describe('User registration', () => {
 
-  test.describe('new user',()=>{
+  test.describe('new user', () => {
 
-    test('valid user, @somke', async({page,pomanager})=>{
+    test('valid user, @somke', async ({ page, pomanager }) => {
 
       //get data from excel
-  const testdata = readExcel(pomanager.gobleobjects.excelFilePath, pomanager.gobleobjects.loginsheet);
+      const testdata = readExcel(pomanager.gobleobjects.excelFilePath, pomanager.gobleobjects.loginsheet);
 
-  //
-  for(const data of testdata as any[]){
-    await pomanager.header.lanchApp();
-    console.log('test');
-    await pomanager.header.goToLogin();
-    await pomanager.signuppage.userSignUp(data.Name, data.Email);
-    await expect(page).toHaveURL('/signup')
-    await pomanager.registerpage.selectGender(data.Gender);
-    await expect(pomanager.registerpage.name).toHaveValue(data.Name)
-    await expect(pomanager.registerpage.email).toHaveValue(data.Email)
-    await pomanager.registerpage.userPassword(data.Password);
-    await pomanager.registerpage.dateOfBirth(data.Day,data.Month,data.Year);
-    await pomanager.registerpage.fullName(data.FirstName,data.LastName);
-    await pomanager.registerpage.fullAddress(data.Address,data.Address2,data.State,data.City,data.Zipcode,data.Mobile);
-    await pomanager.registerpage.accountCreation();
-    await expect(pomanager.registerpage.successMessage).toBeVisible();
-  }
+      //
+      for (const data of testdata as any[]) {
+        await pomanager.header.lanchApp();
+        console.log('test');
+        await pomanager.header.goToLogin();
+        await pomanager.signuppage.userSignUp(data.Name, data.Email);
+        await expect(page).toHaveURL('/signup')
+        await pomanager.registerpage.selectGender(data.Gender);
+        await expect(pomanager.registerpage.name).toHaveValue(data.Name)
+        await expect(pomanager.registerpage.email).toHaveValue(data.Email)
+        await pomanager.registerpage.userPassword(data.Password);
+        await pomanager.registerpage.dateOfBirth(data.Day, data.Month, data.Year);
+        await pomanager.registerpage.fullName(data.FirstName, data.LastName);
+        await pomanager.registerpage.fullAddress(data.Address, data.Address2, data.State, data.City, data.Zipcode, data.Mobile);
+        await pomanager.registerpage.accountCreation();
+        await expect(pomanager.registerpage.successMessage).toBeVisible();
+      }
 
     });
   });
