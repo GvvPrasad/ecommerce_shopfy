@@ -1,16 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
-// import * as dotenv from 'dotenv';
-// import * as path from 'path';
 import { ENV_CONFIG } from './env/env'
-
-// Load env file based on ENV variable passed via CLI
-// const envFile = process.env.ENV ? `.env.${process.env.ENV}` : '.env.qa';
-// dotenv.config({ path: path.resolve(__dirname,'env', envFile) });
-
-// // Sanitize: strip any accidental surrounding quotes
-// const baseURL = process.env.BASE_URL?.replace(/^['"]|['"]$/g, '');
-// console.log(`Running tests against: ${baseURL}`);
-
 
 export default defineConfig({
 
@@ -35,10 +24,8 @@ export default defineConfig({
     ["line"], ["allure-playwright"]
   ],
   
-
   // Folder for test artifacts such as screenshots, videos, traces, etc.
   outputDir: 'test-results',
-
 
 
   // Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -52,8 +39,6 @@ export default defineConfig({
 
     //test mode
     headless: true,
-
-   
 
     // Collect trace when retrying the failed test
     trace: 'retain-on-failure',
