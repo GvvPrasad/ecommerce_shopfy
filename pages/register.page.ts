@@ -35,7 +35,7 @@ export class registerPage {
      }
 
      async userPassword(password:string){
-          await this.password.fill(password)
+          await this.password.fill(password);
      }
 
      async dateOfBirth(day:number, month:string, year: number){
@@ -46,7 +46,7 @@ export class registerPage {
 
      async fullName(fname: string, lname:string){
           await this.firstName.fill(fname);
-          await this.lastName.fill(lname)
+          await this.lastName.fill(lname);
      }
 
      async fullAddress(address1: string, address2: string, state:string, city:string, zipcode: number, mobile:number){
@@ -59,7 +59,11 @@ export class registerPage {
      }
 
      async accountCreation(){
-          await this.createAccount.click()
+          await this.createAccount.click();
+     }
+
+     async continueToHome(){
+          await this.continue.click();
      }
 
 }

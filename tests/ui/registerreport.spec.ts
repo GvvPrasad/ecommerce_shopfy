@@ -24,6 +24,8 @@ test.describe('User registration', () => {
         await pomanager.registerpage.fullAddress(data.Address, data.Address2, data.State, data.City, data.Zipcode, data.Mobile);
         await pomanager.registerpage.accountCreation();
         await expect(pomanager.registerpage.successMessage).toBeVisible();
+        await pomanager.registerpage.continueToHome();
+        await pomanager.header.logOut();
       }
 
     });
