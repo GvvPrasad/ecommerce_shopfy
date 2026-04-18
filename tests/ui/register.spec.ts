@@ -1,5 +1,5 @@
 import { test, expect } from '../../fixtures/baseFixture';
-import { readExcel } from '../../utils/excelUtil';
+import { readExcel } from '../../utils/excel.Util';
 
 
 
