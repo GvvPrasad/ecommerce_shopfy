@@ -1,10 +1,10 @@
 import { test, expect } from '../../fixtures/baseFixture';
-import { readExcel } from '../../utils/excelUtil';
+import { readExcel } from '../../utils/excel.Util';
 
 
-test.describe('User registration', () => {
+test.describe('Registraction - Register - New User', () => {
 
-    test('User creation, @somke', async ({ page, pomanager }) => {
+    test('Multiple User creation, @somke', async ({ page, pomanager }) => {
 
       //get data from excel
       const testdata = readExcel(pomanager.gobleobjects.excelFilePath, pomanager.gobleobjects.loginsheet);
