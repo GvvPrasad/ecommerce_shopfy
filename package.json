@@ -24,6 +24,8 @@
   },
   "homepage": "https://github.com/GvvPrasad/ecommerce_shopfy#readme",
   "devDependencies": {
+    "@azure/identity": "^4.13.1",
+    "@azure/playwright": "^1.1.4",
     "@types/dotenv": "^6.1.1",
     "@types/node": "^25.6.0",
     "allure-commandline": "^2.38.1",

@@ -2,7 +2,7 @@ name: Playwright Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, gvv ]
   pull_request:
     branches: [ main ]
 
@@ -29,8 +29,15 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
+      - name: Azure login
+        uses: azure/login@v3
+        with:
+          creds: ${{ secrets.AZURE_CRED }}
+
       - name: Run Playwright tests (Shard ${{ matrix.shard }})
-        run: xvfb-run --auto-servernum npx playwright test --shard=${{ matrix.shard }}/4
+        env:
+          PLAYWRIGHT_SERVICE_URL: ${{vars.PLAYWRIGHT_SERVICE_URL}}
+        run: xvfb-run --auto-servernum npx playwright test --config=playwright.service.config.ts --workers=2 --shard=${{ matrix.shard }}/4
       
       - name: Upload Playwright Report
         if: always()
