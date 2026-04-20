@@ -13,5 +13,4 @@ export class poManger {
     readonly signuppage = new SignUpPage(this.page);
     readonly gobleobjects = new gobleObject();
     readonly registerpage = new registerPage(this.page);
-
 }

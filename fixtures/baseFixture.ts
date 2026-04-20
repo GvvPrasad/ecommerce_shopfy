@@ -1,8 +1,6 @@
 import { test as base } from '@playwright/test';
 import { poManger } from '../objectrespo/pomanager';
 
-
-
 type MyFixture = {
   pomanager: poManger;
 }
