@@ -29,8 +29,8 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Run Playwright tests (Shard ${{ matrix.shard }})
-        run: xvfb-run --auto-servernum npx playwright test  --shard=${{ matrix.shard }}/4
+      - name: Run Playwright tests #(Shard ${{ matrix.shard }})
+        run: xvfb-run --auto-servernum npx playwright test  #--shard=${{ matrix.shard }}/4
       
       - name: Upload Playwright Report
         if: always()
