@@ -12,7 +12,7 @@ testdata.forEach((data: any, index: number) => {
     //skip the test execution if case type is no
     test.skip((data.Run).toString().toLowerCase() === 'no');
 
-    await pomanager.header.lanchApp();
+    await pomanager.homepage.lanchApp();
     await pomanager.header.goToLogin();
     await pomanager.loginpage.userLogin(data.Email, data.Password);
 

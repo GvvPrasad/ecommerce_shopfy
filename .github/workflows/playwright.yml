@@ -10,10 +10,6 @@ jobs:
   playwright-tests:
     runs-on: ubuntu-latest
 
-#    strategy:
-#      matrix:
-#       shard: [1, 2, 3, 4]
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
@@ -29,8 +25,8 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Run Playwright tests #(Shard ${{ matrix.shard }})
-        run: xvfb-run --auto-servernum npx playwright test  #--shard=${{ matrix.shard }}/4
+      - name: Run Playwright tests 
+        run: xvfb-run --auto-servernum npx playwright test 
       
       - name: Upload Playwright Report
         if: always()

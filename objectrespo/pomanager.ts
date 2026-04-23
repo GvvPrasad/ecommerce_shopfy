@@ -4,6 +4,8 @@ import { Header } from '../pages/header.page';
 import { SignUpPage } from '../pages/signup.page';
 import {registerPage} from '../pages/register.page';
 import { LoginPage } from '../pages/login.page';
+import { HomePage } from '../pages/home.page';
+import {ProductDetailsPage } from '../pages/productdetail.page';
 
 
 export class poManger {
@@ -15,4 +17,6 @@ export class poManger {
     readonly gobleobjects = new gobleObject();
     readonly registerpage = new registerPage(this.page);
     readonly loginpage = new LoginPage(this.page);
+    readonly homepage = new HomePage(this.page);
+    readonly productdetailspage = new ProductDetailsPage(this.page); 
 }

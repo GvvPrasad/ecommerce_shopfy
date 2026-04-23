@@ -5,9 +5,10 @@ const envFile = process.env.ENV ? `.env.${process.env.ENV}` : '.env.qa';
 dotenv.config({ path: path.resolve(__dirname, envFile) });
 
 const baseURL = process.env.BASE_URL?.replace(/^['"]|['"]$/g, '');
-console.log(`Running tests against: ${baseURL}`);
+const userSignInEmail = process.env.USER_EMAIL;
+const userSignInPassword = process.env.USER_PASSWORD;
 
 export const ENV_CONFIG = {
-  baseURL,
+  baseURL, userSignInEmail, userSignInPassword,
 };
 
