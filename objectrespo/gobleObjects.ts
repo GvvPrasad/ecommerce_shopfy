@@ -2,7 +2,8 @@
 export class gobleObject {
 
     readonly excelFilePath = '../test-data/testData.xlsx';
-    readonly loginsheet = 'Sheet1';
+    readonly register = 'register';
+    readonly login = 'login';
 }
 
 

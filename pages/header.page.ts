@@ -10,10 +10,6 @@ export class Header{
     readonly contactus = this.page.getByRole('link',{name:' Contact us'});
     readonly logout = this.page.getByRole('link',{name:' Logout'});
 
-    async lanchApp(){
-        await this.page.goto('/');
-    }
-
     async goToHome(){
         await this.home.click();
     }
