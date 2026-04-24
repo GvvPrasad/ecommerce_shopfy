@@ -1,9 +1,9 @@
 import { test, expect } from '../../fixtures/baseFixture';
-import { readExcel } from '../../utils/excel.Util';
-import { gobleObject } from '../../objectrespo/gobleObjects';
+import { readExcel } from '../../utils/excel.util';
+import { GlobalObject } from '../../page-objects/globalObjects';
 
-const gobleobjects = new gobleObject();
-const testdata = readExcel(gobleobjects.excelFilePath, gobleobjects.login) as any[];
+const globalObjects = new GlobalObject();
+const testdata = readExcel(globalObjects.excelFilePath, globalObjects.login) as any[];
 
 testdata.forEach((data: any, index: number) => {
 
@@ -12,16 +12,15 @@ testdata.forEach((data: any, index: number) => {
     //skip the test execution if case type is no
     test.skip((data.Run).toString().toLowerCase() === 'no');
 
-    await pomanager.homepage.lanchApp();
     await pomanager.header.goToLogin();
-    await pomanager.loginpage.userLogin(data.Email, data.Password);
+    await pomanager.loginPage.userLogin(data.Email, data.Password);
 
     // Assuming positive case: check if logged in, perhaps by checking logout button visible
     if ((data.Case).toString().toLowerCase() === "positive") {
       await expect(pomanager.header.logout).toBeVisible();
       await pomanager.header.logOut;
     } else {
-      await expect(pomanager.loginpage.loginError).toBeVisible();
+      await expect(pomanager.loginPage.loginError).toBeVisible();
     }
   });
 });

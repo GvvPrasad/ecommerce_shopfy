@@ -1,8 +1,8 @@
 import { test as base, expect, Page } from '@playwright/test';
-import { poManger } from '../objectrespo/pomanager';
+import { PageObjectManager } from '../page-objects/pageObjectManager';
 
 type MyFixture = {
-  pomanager: poManger;
+  pomanager: PageObjectManager;
   page: Page;
 }
 
@@ -10,7 +10,8 @@ export const test = base.extend<MyFixture>({
   
   //page object manager
   pomanager: async ({ page }, use) => {
-    const pomanager = new poManger(page)
+    const pomanager = new PageObjectManager(page)
+    await pomanager.homePage.launchApp();
     await use(pomanager)
   },
   
