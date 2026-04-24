@@ -9,7 +9,7 @@ export class HomePage {
    readonly dressName = this.page.locator('.features_items .productinfo p');
    readonly viewProduct = this.page.locator('.choose'); 
 
-    async lanchApp(){
+    async launchApp(){
         await this.page.goto('/');
     }
 

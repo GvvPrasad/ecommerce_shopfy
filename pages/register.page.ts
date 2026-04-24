@@ -1,20 +1,8 @@
 import { Page, Locator, expect } from "@playwright/test";
 
-export class registerPage {
+export class RegisterPage {
 
-     readonly fieldMap: Record<string, Locator>;
-
-     constructor(private readonly page: Page) {
-          this.fieldMap = {
-               Password: this.password,
-               FirstName: this.firstName,
-               LastName: this.lastName,
-               State: this.state,
-               City: this.city,
-               ZipCode: this.zipcode,
-               Mobile: this.mobileNumber
-          };
-     }
+     constructor(private readonly page: Page) {}
 
      readonly mr = this.page.getByRole('radio', { name: 'Mr.' });
      readonly mrs = this.page.getByRole('radio', { name: 'Mrs.' });
@@ -37,7 +25,6 @@ export class registerPage {
      readonly createAccount = this.page.getByRole('button', { name: 'Create Account' });
      readonly successMessage = this.page.locator('//h2[@data-qa="account-created"]');
      readonly continue = this.page.getByRole('link', { name: 'Continue' });
-
 
 
      async selectGender(gender: string) {
