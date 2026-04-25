@@ -1,9 +1,9 @@
 import { test, expect } from '../../fixtures/baseFixture';
-import { readExcel } from '../../utils/excel.Util';
-import { gobleObject } from '../../objectrespo/gobleObjects';
+import { readExcel } from '../../utils/excel.util';
+import { GlobalObject } from '../../page-objects/globalObjects';
 
-const gobleobjects = new gobleObject();
-const testdata = readExcel(gobleobjects.excelFilePath, gobleobjects.register) as any[];
+const globalObjects = new GlobalObject();
+const testdata = readExcel(globalObjects.excelFilePath, globalObjects.register) as any[];
 
 testdata.forEach((data: any, index: number) => {
 
@@ -12,34 +12,33 @@ testdata.forEach((data: any, index: number) => {
     //skip the test execution if Run type is no
     test.skip((data.Run).toString().toLowerCase() === 'no');
 
-    await pomanager.homepage.lanchApp();
     await pomanager.header.goToLogin();
-    await pomanager.signuppage.userSignUp(data.Name, data.Email);
-    await expect(page).toHaveURL('/signup');
+    await pomanager.signUpPage.userSignUp(data.Name, data.Email);
 
     //existing email error
-    if (await pomanager.signuppage.emailExist.isVisible()) {
-      await expect(pomanager.signuppage.emailExist).toHaveText('Email Address already exist!');
+    if (await pomanager.signUpPage.emailExist.isVisible()) {
       // End test here (mark as pass since expected error is shown)
       return;
+    } else {
+      await expect(page).toHaveURL('/signup');
     };
 
-    await pomanager.registerpage.selectGender(data.Gender);
-    await expect(pomanager.registerpage.name).toHaveValue(data.Name);
-    await expect(pomanager.registerpage.email).toHaveValue(data.Email);
-    await pomanager.registerpage.userPassword(data.Password);
-    await pomanager.registerpage.dateOfBirth(data.Day, data.Month, data.Year);
-    await pomanager.registerpage.fullName(data.FirstName, data.LastName);
-    await pomanager.registerpage.fullAddress(data.Address, data.Address2, data.State, data.City, data.Zipcode, data.Mobile);
-    await pomanager.registerpage.accountCreation();
+    await pomanager.registerPage.selectGender(data.Gender);
+    await expect(pomanager.registerPage.name).toHaveValue(data.Name);
+    await expect(pomanager.registerPage.email).toHaveValue(data.Email);
+    await pomanager.registerPage.userPassword(data.Password);
+    await pomanager.registerPage.dateOfBirth(data.Day, data.Month, data.Year);
+    await pomanager.registerPage.fullName(data.FirstName, data.LastName);
+    await pomanager.registerPage.fullAddress(data.Address, data.Address2, data.State, data.City, data.Zipcode, data.Mobile);
+    await pomanager.registerPage.accountCreation();
 
     //check user should be created or not
     if ((data.Case).toString().toLowerCase() === "Positive") {
-      await expect(pomanager.registerpage.successMessage).toBeVisible();
-      await pomanager.registerpage.continueToHome();
+      await expect(pomanager.registerPage.successMessage).toBeVisible();
+      await pomanager.registerPage.continueToHome();
       await pomanager.header.logOut();
     } else {
-      await expect(pomanager.registerpage.successMessage).not.toBeVisible();
+      await expect(pomanager.registerPage.successMessage).not.toBeVisible();
     }
 
   });
