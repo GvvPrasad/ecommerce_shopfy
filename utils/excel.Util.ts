@@ -5,7 +5,6 @@ export function readExcel(filePath: string, sheetName: string){
 
     //convert relative path to absoult path
     const fullPath = path.resolve(__dirname,filePath);
-    console.log('Full Path is ', fullPath);
 
     //get the file
     const workbook = XLSX.readFile(fullPath);
