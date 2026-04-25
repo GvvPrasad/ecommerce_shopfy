@@ -14,15 +14,26 @@ testdata.forEach((data: any, index: number) => {
 
     await pomanager.header.goToLogin();
     await pomanager.signUpPage.userSignUp(data.Name, data.Email);
+<<<<<<< HEAD
     
     //existing email error
     if (await pomanager.signUpPage.emailExist.isVisible()) {
+=======
+    await expect(page).toHaveURL('/signup');
+
+    //existing email error
+    if (await pomanager.signUpPage.emailExist.isVisible()) {
+      await expect(pomanager.signUpPage.emailExist).toHaveText('Email Address already exist!');
+>>>>>>> 4604f5fb0f08c539169d28b02737b1037f655046
       // End test here (mark as pass since expected error is shown)
       return;
     };
 
+<<<<<<< HEAD
     await expect(page).toHaveURL('/signup');
 
+=======
+>>>>>>> 4604f5fb0f08c539169d28b02737b1037f655046
     await pomanager.registerPage.selectGender(data.Gender);
     await expect(pomanager.registerPage.name).toHaveValue(data.Name);
     await expect(pomanager.registerPage.email).toHaveValue(data.Email);

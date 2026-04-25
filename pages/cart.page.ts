@@ -9,5 +9,4 @@ export class CartPage{
     readonly productPrice = this.page.locator('.cart_price p');
     readonly productQuantity = this.page.locator('.cart_quantity button');
     readonly totalCost = this.page.locator('.cart_total p');
-
 }
