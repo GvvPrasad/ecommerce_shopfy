@@ -1,15 +1,13 @@
 import { test, expect } from '../../fixtures/baseFixture';
 
 
-
-
 test('Add to cart', async ({ page, pomanager }) => {
 
     //move to product detail page
     let desiredProductPrice = await pomanager.helper.moveToProductDetails(page, pomanager.globalObjects.desiredProduct);
 
     //add to cart
-    await pomanager.productDetailsPage.enterQuantity('2'); 
+    await pomanager.productDetailsPage.enterQuantity('2');
     await pomanager.productDetailsPage.clickAddToCart();
 
     //PopUp
@@ -41,4 +39,3 @@ test('Add to cart', async ({ page, pomanager }) => {
     await expect(totalPrice).toBe(totalCost)
 
 });
-
