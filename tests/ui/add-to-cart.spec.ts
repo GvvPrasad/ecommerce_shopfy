@@ -1,8 +1,6 @@
 import { test, expect } from '../../fixtures/baseFixture';
 
 
-
-
 test('Add to cart', async ({ page, pomanager }) => {
 
     //move to product detail page
