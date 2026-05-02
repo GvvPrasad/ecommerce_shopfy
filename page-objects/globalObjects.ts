@@ -5,5 +5,5 @@ export class GlobalObject {
     readonly register = 'register';
     readonly login = 'login';
     readonly productslist = 'products'
-    readonly desiredProduct ='Sleeveless Dress'
+    readonly desiredProduct ='Stylish Dress'
 }
