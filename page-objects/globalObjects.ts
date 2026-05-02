@@ -9,5 +9,4 @@ export class GlobalObject {
 =======
     readonly productslist = 'products'
     readonly desiredProduct ='Stylish Dress'
->>>>>>> gvv
 }

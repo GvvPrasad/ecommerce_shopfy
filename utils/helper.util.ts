@@ -7,13 +7,10 @@ import { PageObjectManager } from '../page-objects/pageObjectManager';
 
 export class Helper {
 
-<<<<<<< HEAD
-    async moveToProductDetails(page: Page, desiredProduct: string): Promise<string | undefined> {
-=======
+
     //move to product details page
     async moveToProductDetails(page: Page, desiredProduct: string): Promise<string | undefined> {
 
->>>>>>> gvv
         const pomanager = new PageObjectManager(page);
 
         //get the no of product avaliable in feature section
@@ -30,8 +27,6 @@ export class Helper {
         }
     }
 
-<<<<<<< HEAD
-=======
     //add to cart
     async addToCart(page: Page, desiredQuantity: string) {
 
@@ -47,7 +42,7 @@ export class Helper {
 
         const rawPrice = await pomanager.cartPage.productPrice.innerText();
         console.log("raw price of individual product: " + rawPrice)
-
+        
         // Remove currency text, commas, spaces, keep digits + decimal
         const price = Number(rawPrice.replace("Rs.", "").replace(/,/g, "").trim());
         console.log("price in number: " + price);
@@ -56,15 +51,4 @@ export class Helper {
         const quantity = Number(quantityText.trim());
         return price * quantity;
     }
-
-    //validate product details in cart
-    async validatePurchaseDetail(page: Page, desiredProduct: string, desiredProductPrice: string, desiredQuantity: string) {
-        const pomanager = new PageObjectManager(page);
-
-        await expect(pomanager.cartPage.productName).toBeVisible();
-        await expect(pomanager.cartPage.productName).toHaveText(desiredProduct)
-        await expect(pomanager.cartPage.productPrice).toHaveText(desiredProductPrice!);
-        await expect(pomanager.cartPage.productQuantity).toHaveText(desiredQuantity);
-    }
->>>>>>> gvv
 }
