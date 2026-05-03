@@ -156,15 +156,11 @@ jobs:
           path: playwright-report/
         # Uploads the default Playwright HTML report per shard
 
-      - name: Generate Allure Report
-        run: |
-          npx allure generate allure-results --clean -o allure-report
-        # Converts raw allure-results into a static HTML report inside 'allure-report' folder
-
-      - name: Upload Allure Report
+      - name: Upload Allure Results and Report
         if: always()
         uses: actions/upload-artifact@v5
         with:
+<<<<<<< HEAD
           name: allure-results-shard-${{ matrix.shard }}
           path: allure-results/
         # Uploads Allure results per shard
@@ -216,3 +212,9 @@ jobs:
           name: allure-report-final
           path: allure-report/
         # Uploads the merged Allure report as a downloadable artifact
+=======
+          name: allure-artifacts
+          path: |
+           allure-results/
+            allure-report/
+>>>>>>> 772bbb2 (yml update)
