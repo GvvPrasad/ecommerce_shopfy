@@ -38,15 +38,11 @@ jobs:
           path: playwright-report/
       # Uploads the default Playwright HTML report as a downloadable artifact
 
-      - name: Generate Allure Report
-        run: |
-          npx allure generate allure-results --clean -o allure-report
-        # Converts raw allure-results into a static HTML report inside 'allure-report' folder
-
-      - name: Upload Allure Report
+      - name: Upload Allure Results and Report
         if: always()
         uses: actions/upload-artifact@v5
         with:
-          name: allure-report
-          path: allure-report/
-        # Uploads the generated Allure report as a downloadable artifact
+          name: allure-artifacts
+          path: |
+           allure-results/
+            allure-report/
