@@ -72,7 +72,8 @@ jobs:
         run: npx playwright install --with-deps # Installs required browsers and OS deps
 
       - name: Run Playwright tests 
-        run: xvfb-run --auto-servernum npx playwright test --reporter=line,allure-playwright
+        run: |
+          xvfb-run --auto-servernum npx playwright test --reporter=line,allure-playwright
         # 'xvfb-run' allows running browsers in headless mode on Linux CI
         # '--reporter=line,allure-playwright' generates both console output and Allure results
       
