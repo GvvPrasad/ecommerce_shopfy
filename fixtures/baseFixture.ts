@@ -1,4 +1,4 @@
-import { test as base, expect, Page } from '@playwright/test';
+import { test as base, expect, Page, request } from '@playwright/test';
 import { PageObjectManager } from '../page-objects/pageObjectManager';
 
 type MyFixture = {
@@ -30,4 +30,4 @@ export const test = base.extend<MyFixture>({
 
 });
 
-export { expect } from '@playwright/test';
+export { expect, request } from '@playwright/test';

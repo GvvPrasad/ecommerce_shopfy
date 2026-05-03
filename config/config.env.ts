@@ -25,6 +25,9 @@ interface EnvConfig {
   userCcvc: string;
   userCexpmonth: string;
   userCexpyear: string;
+  apiBaseUrl: string;
+  apiUserEmail:string;
+  apiUserPassword: string;
 }
 
 // Export config object with null‑assertion safety
@@ -38,4 +41,7 @@ export const ENV_CONFIG: EnvConfig = {
   userCcvc: getEnvVar("User_Ccvc"),
   userCexpmonth: getEnvVar("User_Cexpmonth"),
   userCexpyear: getEnvVar("User_Cexpyear"),
+  apiBaseUrl: getEnvVar("BASE_API_URL"),
+  apiUserEmail: getEnvVar("API_USER_EMAIL"),
+  apiUserPassword: getEnvVar("API_USER_PASSWORD"),
 };
