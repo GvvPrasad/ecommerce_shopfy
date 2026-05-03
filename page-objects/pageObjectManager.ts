@@ -15,6 +15,10 @@ import { CheckOutPage } from '../pages/checkout.page';
 import { paymentPage } from '../pages/payment.page'
 import { PaymentConfirmationPage } from '../pages/payment-confirmation.page'
 >>>>>>> gvv
+import { CartPage } from '../pages/cart.page';
+import { CheckOutPage } from '../pages/checkout.page';
+import { paymentPage } from '../pages/payment.page'
+import { PaymentConfirmationPage } from '../pages/payment-confirmation.page'
 
 export class PageObjectManager {
 
@@ -35,5 +39,8 @@ export class PageObjectManager {
     readonly payementpage = new paymentPage(this.page);
     readonly paymentconfirmation = new PaymentConfirmationPage(this.page);
 >>>>>>> gvv
+    readonly checkoutpage = new CheckOutPage(this.page);
+    readonly payementpage = new paymentPage(this.page);
+    readonly paymentconfirmation = new PaymentConfirmationPage(this.page);
     
 }
