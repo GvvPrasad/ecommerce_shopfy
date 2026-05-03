@@ -7,14 +7,6 @@ import { LoginPage } from '../pages/login.page';
 import { HomePage } from '../pages/home.page';
 import { ProductDetailsPage } from '../pages/product-detail.page';
 import { Helper } from '../utils/helper.util';
-<<<<<<< HEAD
-import { CartPage } from '../pages/cart.page'
-=======
-import { CartPage } from '../pages/cart.page';
-import { CheckOutPage } from '../pages/checkout.page';
-import { paymentPage } from '../pages/payment.page'
-import { PaymentConfirmationPage } from '../pages/payment-confirmation.page'
->>>>>>> gvv
 import { CartPage } from '../pages/cart.page';
 import { CheckOutPage } from '../pages/checkout.page';
 import { paymentPage } from '../pages/payment.page'
@@ -33,12 +25,6 @@ export class PageObjectManager {
     readonly productDetailsPage = new ProductDetailsPage(this.page); 
     readonly helper = new Helper();
     readonly cartPage = new CartPage(this.page);
-<<<<<<< HEAD
-=======
-    readonly checkoutpage = new CheckOutPage(this.page);
-    readonly payementpage = new paymentPage(this.page);
-    readonly paymentconfirmation = new PaymentConfirmationPage(this.page);
->>>>>>> gvv
     readonly checkoutpage = new CheckOutPage(this.page);
     readonly payementpage = new paymentPage(this.page);
     readonly paymentconfirmation = new PaymentConfirmationPage(this.page);
