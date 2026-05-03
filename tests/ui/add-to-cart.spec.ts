@@ -1,6 +1,7 @@
 import { test, expect } from '../../fixtures/baseFixture';
 
 
+<<<<<<< HEAD
 
 
 test('Add to cart', async ({ page, pomanager }) => {
@@ -11,10 +12,21 @@ test('Add to cart', async ({ page, pomanager }) => {
     //add to cart
     await pomanager.productDetailsPage.enterQuantity('2'); 
     await pomanager.productDetailsPage.clickAddToCart();
+=======
+test('Add to cart', async ({ page, pomanager }) => {
+
+    await pomanager.homePage.launchApp();
+
+    //move to product detail page
+    let desiredProductPrice = await pomanager.helper.moveToProductDetails(page, pomanager.globalObjects.desiredProduct);
+
+    await pomanager.helper.addToCart(page, '3')
+>>>>>>> gvv
 
     //PopUp
     await pomanager.productDetailsPage.popup.isVisible();
     await expect(pomanager.productDetailsPage.confirmMessage).toBeVisible();
+<<<<<<< HEAD
     await pomanager.productDetailsPage.viewCartFromModal();
     await expect(page.url()).toContain('view_cart')
 
@@ -42,3 +54,6 @@ test('Add to cart', async ({ page, pomanager }) => {
 
 });
 
+=======
+});
+>>>>>>> gvv

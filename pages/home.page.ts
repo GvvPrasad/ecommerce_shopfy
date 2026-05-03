@@ -13,5 +13,4 @@ export class HomePage {
         await this.page.goto('/');
     }
 
-
 }

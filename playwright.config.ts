@@ -1,5 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
-import { ENV_CONFIG } from './env/env'
+import { ENV_CONFIG } from './config/config.env'
 
 export default defineConfig({
 

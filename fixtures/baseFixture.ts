@@ -11,7 +11,10 @@ export const test = base.extend<MyFixture>({
   //page object manager
   pomanager: async ({ page }, use) => {
     const pomanager = new PageObjectManager(page)
+<<<<<<< HEAD
     await pomanager.homePage.launchApp();
+=======
+>>>>>>> gvv
     await use(pomanager)
   },
   

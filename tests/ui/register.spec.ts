@@ -12,6 +12,7 @@ testdata.forEach((data: any, index: number) => {
     //skip the test execution if Run type is no
     test.skip((data.Run).toString().toLowerCase() === 'no');
 
+<<<<<<< HEAD
     await pomanager.header.goToLogin();
     await pomanager.signUpPage.userSignUp(data.Name, data.Email);
     await expect(page).toHaveURL('/signup');
@@ -19,8 +20,18 @@ testdata.forEach((data: any, index: number) => {
     //existing email error
     if (await pomanager.signUpPage.emailExist.isVisible()) {
       await expect(pomanager.signUpPage.emailExist).toHaveText('Email Address already exist!');
+=======
+    await pomanager.homePage.launchApp();
+    await pomanager.header.goToLogin();
+    await pomanager.signUpPage.userSignUp(data.Name, data.Email);
+
+    //existing email error
+    if (await pomanager.signUpPage.emailExist.isVisible()) {
+>>>>>>> gvv
       // End test here (mark as pass since expected error is shown)
       return;
+    } else {
+      await expect(page).toHaveURL('/signup');
     };
 
     await pomanager.registerPage.selectGender(data.Gender);

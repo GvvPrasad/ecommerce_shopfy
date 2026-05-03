@@ -3,10 +3,17 @@ import { test, expect } from '../../fixtures/baseFixture';
 
 test('Validate product details between Home & details page', async ({ page, pomanager }) => {
 
+<<<<<<< HEAD
         //move to product detail page
     let desiredProductPrice =  await pomanager.helper.moveToProductDetails(page,pomanager.globalObjects.desiredProduct);
  
     console.log(typeof(desiredProductPrice) + "  from prodetails section")
+=======
+    await pomanager.homePage.launchApp();
+
+    //move to product detail page
+    let desiredProductPrice = await pomanager.helper.moveToProductDetails(page, pomanager.globalObjects.desiredProduct);
+>>>>>>> gvv
 
     //product details page
     await expect(page.url()).toContain('product_details');
