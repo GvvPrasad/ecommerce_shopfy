@@ -60,6 +60,7 @@ jobs:
       fail-fast: false
       matrix:
         shard: [1, 2, 3, 4] # Split tests into 4 shards
+        shard: [1, 2, 3, 4] # Split tests into 4 shards
 
     steps:
       - name: Checkout code
@@ -77,9 +78,11 @@ jobs:
         run: npx playwright install --with-deps # Installs required browsers and OS deps
 
       - name: Run Playwright tests
+      - name: Run Playwright tests
         run: xvfb-run --auto-servernum npx playwright test --shard=${{ matrix.shard }}/4 --reporter=line,allure-playwright
         # 'xvfb-run' allows running browsers in headless mode on Linux CI
         # '--reporter=line,allure-playwright' generates both console output and Allure results
+
 
       - name: Upload Playwright Report
         if: always()
@@ -151,26 +154,29 @@ jobs:
       - name: Upload final Allure report
         uses: actions/upload-artifact@v5
           name: playwright-report
+          name: playwright-report-shard-${{ matrix.shard }}
           path: playwright-report/
-      # Uploads the default Playwright HTML report as a downloadable artifact
+        # Uploads the default Playwright HTML report per shard
 
       - name: Upload Allure results
-        uses: actions/upload-artifact@v4
+        if: always()
+        uses: actions/upload-artifact@v5
         with:
           name: allure-results-shard-${{ matrix.shard }}
-          path: allure-results
+          path: allure-results/
+        # Uploads Allure results per shard
 
-   merge-allure-report:
+  merge-allure-report:
     needs: playwright-tests
     if: always()
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: lts/*
 
@@ -178,25 +184,32 @@ jobs:
         run: npm install -g allure-commandline
 
       - name: Download all Allure results
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           path: allure-results
+        # Downloads all shard artifacts into allure-results/
 
       - name: Merge Allure results
         run: |
           mkdir merged-results
-          find allure-results -type f -exec cp {} merged-results \;
+          find allure-results -type f -name '*.json' -exec cp {} merged-results/ \;
+        # Copies all JSON result files from each shard into one folder
 
       - name: Generate final Allure report
         run: allure generate merged-results --clean -o allure-report
+        # Generates the combined Allure HTML report
 
       - name: Upload final Allure report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: allure-report-final
           path: allure-report/
         # Uploads the merged Allure report as a downloadable artifact
 
           name: allure-report-final
-          path: allure-report
-     
+          path: allure-report/
+        # Uploads the merged Allure report as a downloadable artifact
+
+          name: allure-report-final
+          path: allure-report/
+        # Uploads the merged Allure report as a downloadable artifact
