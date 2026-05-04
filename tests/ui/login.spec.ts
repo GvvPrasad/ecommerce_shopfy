@@ -12,13 +12,14 @@ testdata.forEach((data: any, index: number) => {
     //skip the test execution if case type is no
     test.skip((data.Run).toString().toLowerCase() === 'no');
 
+    await pomanager.homePage.launchApp();
     await pomanager.header.goToLogin();
     await pomanager.loginPage.userLogin(data.Email, data.Password);
 
     // Assuming positive case: check if logged in, perhaps by checking logout button visible
     if ((data.Case).toString().toLowerCase() === "positive") {
       await expect(pomanager.header.logout).toBeVisible();
-      await pomanager.header.logOut;
+      await pomanager.header.logOut();
     } else {
       await expect(pomanager.loginPage.loginError).toBeVisible();
     }

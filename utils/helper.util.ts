@@ -1,9 +1,11 @@
-import { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { PageObjectManager } from '../page-objects/pageObjectManager';
 
 export class Helper {
 
+    //move to product details page
     async moveToProductDetails(page: Page, desiredProduct: string): Promise<string | undefined> {
+
         const pomanager = new PageObjectManager(page);
 
         //get the no of product avaliable in feature section
@@ -20,4 +22,52 @@ export class Helper {
         }
     }
 
+    //add to cart
+    async addToCart(page: Page, desiredQuantity: string) {
+
+        const pomanager = new PageObjectManager(page);
+
+        await pomanager.productDetailsPage.enterQuantity(desiredQuantity);
+        await pomanager.productDetailsPage.clickAddToCart();
+    }
+
+    //calculate single product total cost
+    async totalProductValue(page: Page) {
+        const pomanager = new PageObjectManager(page);
+
+        const rawPrice = await pomanager.cartPage.productPrice.innerText();
+        console.log("raw price of individual product: " + rawPrice)
+
+        // Remove currency text, commas, spaces, keep digits + decimal
+        const price = Number(rawPrice.replace("Rs.", "").replace(/,/g, "").trim());
+        console.log("price in number: " + price);
+
+        const quantityText = await pomanager.cartPage.productQuantity.innerText();
+        const quantity = Number(quantityText.trim());
+        return price * quantity;
+    }
+
+    //validate product details in cart
+    async validatePurchaseDetail(page: Page, desiredProduct: string, desiredProductPrice: string, desiredQuantity: string) {
+        const pomanager = new PageObjectManager(page);
+
+        await expect(pomanager.cartPage.productName).toBeVisible();
+        await expect(pomanager.cartPage.productName).toHaveText(desiredProduct)
+        await expect(pomanager.cartPage.productPrice).toHaveText(desiredProductPrice!);
+        await expect(pomanager.cartPage.productQuantity).toHaveText(desiredQuantity);
+    }
+
+    //looping through the products for the api application
+    async selectTheDesirecApiProduct(page: Page, desiredItem:string){
+        const pomanager = new PageObjectManager(page);
+        const itemcount = await pomanager.apidashboardpage.items.count();
+
+        for (let i = 0; i < itemcount; i++) {
+            let currentItemName = await pomanager.apidashboardpage.itemName.nth(i).innerText();
+            if(currentItemName === desiredItem){
+                await pomanager.apidashboardpage.addToCartButton.nth(i).click();
+            }
+            
+        }
+    }
 }
