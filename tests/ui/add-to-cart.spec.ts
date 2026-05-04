@@ -1,8 +1,5 @@
 import { test, expect } from '../../fixtures/baseFixture';
 
-
-
-
 test('Add to cart', async ({ page, pomanager }) => {
 
     await pomanager.homePage.launchApp();

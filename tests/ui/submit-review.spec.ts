@@ -5,8 +5,6 @@ test('write a product review', async ({ page, pomanager }) => {
 
     await pomanager.homePage.launchApp();
 
-    await pomanager.homePage.launchApp();
-
     //navigative to product details page
     let desiredProductPrice = await pomanager.helper.moveToProductDetails(page, pomanager.globalObjects.desiredProduct);
 
@@ -15,9 +13,6 @@ test('write a product review', async ({ page, pomanager }) => {
 
     //validaet success message
     await expect(pomanager.productDetailsPage.successMessage).toBeVisible();
-    await expect(pomanager.productDetailsPage.successMessage).toBeVisible();
-    await expect(pomanager.productDetailsPage.successMessage).toBeVisible();
     await expect(pomanager.productDetailsPage.successMessage).toHaveText('Thank you for your review.')
-    await pomanager.productDetailsPage.successMessage.screenshot({path:'success.png'})
     await pomanager.productDetailsPage.successMessage.screenshot({path:'success.png'})
 });

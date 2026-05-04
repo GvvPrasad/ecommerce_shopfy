@@ -19,7 +19,7 @@ testdata.forEach((data: any, index: number) => {
     // Assuming positive case: check if logged in, perhaps by checking logout button visible
     if ((data.Case).toString().toLowerCase() === "positive") {
       await expect(pomanager.header.logout).toBeVisible();
-      await pomanager.header.logOut;
+      await pomanager.header.logOut();
     } else {
       await expect(pomanager.loginPage.loginError).toBeVisible();
     }

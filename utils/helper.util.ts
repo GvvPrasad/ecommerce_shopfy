@@ -56,4 +56,18 @@ export class Helper {
         await expect(pomanager.cartPage.productPrice).toHaveText(desiredProductPrice!);
         await expect(pomanager.cartPage.productQuantity).toHaveText(desiredQuantity);
     }
+
+    //looping through the products for the api application
+    async selectTheDesirecApiProduct(page: Page, desiredItem:string){
+        const pomanager = new PageObjectManager(page);
+        const itemcount = await pomanager.apidashboardpage.items.count();
+
+        for (let i = 0; i < itemcount; i++) {
+            let currentItemName = await pomanager.apidashboardpage.itemName.nth(i).innerText();
+            if(currentItemName === desiredItem){
+                await pomanager.apidashboardpage.addToCartButton.nth(i).click();
+            }
+            
+        }
+    }
 }

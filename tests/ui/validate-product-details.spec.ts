@@ -7,7 +7,6 @@ test('Validate product details between Home & details page', async ({ page, poma
 
     //move to product detail page
     let desiredProductPrice = await pomanager.helper.moveToProductDetails(page, pomanager.globalObjects.desiredProduct);
->>>>>>> gvv
 
     //product details page
     await expect(page.url()).toContain('product_details');

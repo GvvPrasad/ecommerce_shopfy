@@ -11,6 +11,7 @@ import { CartPage } from '../pages/cart.page';
 import { CheckOutPage } from '../pages/checkout.page';
 import { paymentPage } from '../pages/payment.page'
 import { PaymentConfirmationPage } from '../pages/payment-confirmation.page'
+import { apiDashboardPage } from '../pages/api-dashboard.page'
 
 export class PageObjectManager {
 
@@ -28,5 +29,6 @@ export class PageObjectManager {
     readonly checkoutpage = new CheckOutPage(this.page);
     readonly payementpage = new paymentPage(this.page);
     readonly paymentconfirmation = new PaymentConfirmationPage(this.page);
+    readonly apidashboardpage = new apiDashboardPage(this.page);
     
 }

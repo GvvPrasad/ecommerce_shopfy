@@ -18,7 +18,6 @@ testdata.forEach((data: any, index: number) => {
 
     //existing email error
     if (await pomanager.signUpPage.emailExist.isVisible()) {
->>>>>>> gvv
       // End test here (mark as pass since expected error is shown)
       return;
     } else {
