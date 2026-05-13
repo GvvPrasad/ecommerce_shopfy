@@ -1,4 +1,3 @@
-
 # Playwright
 node_modules/
 /test-results/
@@ -10,4 +9,3 @@ node_modules/
 /allure-results/
 /downloads/
 /api/
-

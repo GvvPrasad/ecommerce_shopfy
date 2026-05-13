@@ -5,11 +5,11 @@ import { ENV_CONFIG } from '../../config/config.env'
 test('Add to cart', async ({ page, pomanager }) => {
 
     //lanch Application
-    await pomanager.homePage.launchApp();
+    await page.goto('/')
 
     //login
-    await pomanager.header.goToLogin();
-    await pomanager.loginPage.userLogin(ENV_CONFIG.userSignInEmail, ENV_CONFIG.userSignInPassword);
+    await pomanager.header.goToLoginAndSignUpScreen();
+    await pomanager.loginSignup.userLogin(ENV_CONFIG.User_Email, ENV_CONFIG.User_password);
 
     //move to product detail page
     let desiredProductPrice = await pomanager.helper.moveToProductDetails(page, pomanager.globalObjects.desiredProduct);
@@ -48,17 +48,19 @@ test('Add to cart', async ({ page, pomanager }) => {
     //place order
     await pomanager.checkoutpage.placeTheOrder();
 
-    //Make payment
-    await pomanager.payementpage.complatePayment();
+    //Fill the card details & make payment
+    await pomanager.payment.makePayment();
 
-    await expect(pomanager.paymentconfirmation.successmessage).toBeVisible();
-    await expect(pomanager.paymentconfirmation.orderConfirmation).toBeVisible();
+    //validate succes message is displayed
+    await expect(pomanager.orderConfirmation.orderConfirmation).toBeVisible();
+    await expect(pomanager.orderConfirmation.successmessage).toBeVisible();
+
 
     //Download Invoice
     //Wait for the download event while clicking the download button
     const [download] = await Promise.all([
         page.waitForEvent("download"), // listens for a download to start
-        await pomanager.paymentconfirmation.downloadInvoice(), // triggers the download
+        await pomanager.orderConfirmation.downloadInvoice(), // triggers the download
     ]);
 
     //Get the suggested filename

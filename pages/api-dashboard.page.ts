@@ -8,5 +8,6 @@ export class apiDashboardPage{
     readonly itemName = this.page.locator('div.card-body h5 b');
     readonly itemPrice = this.page.locator('.card-body .text-muted');
     readonly addToCartButton = this.page.locator('button').filter({ hasText: 'Add To Cart' })
+    readonly orders = this.page.getByRole('button', { name: 'ORDERS' })
     
 }

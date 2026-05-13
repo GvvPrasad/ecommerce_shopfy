@@ -1,6 +1,6 @@
 import { Page, Locator, expect  } from "@playwright/test";
 
-export class HomePage {
+export class ProductPage {
 
     constructor (private readonly page: Page) {}
 
@@ -8,9 +8,4 @@ export class HomePage {
    readonly dressPrice = this.page.locator('.features_items .productinfo h2');
    readonly dressName = this.page.locator('.features_items .productinfo p');
    readonly viewProduct = this.page.locator('.choose'); 
-
-    async launchApp(){
-        await this.page.goto('/');
-    }
-
 }

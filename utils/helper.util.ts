@@ -9,14 +9,14 @@ export class Helper {
         const pomanager = new PageObjectManager(page);
 
         //get the no of product avaliable in feature section
-        const productcount = await pomanager.homePage.featureProductItems.count();
+        const productcount = await pomanager.products.featureProductItems.count();
 
         //loop through all the products 
         for (let i = 0; i < productcount; i++) {
-            let productName = await pomanager.homePage.dressName.nth(i).innerText();
+            let productName = await pomanager.products.dressName.nth(i).innerText();
             if (productName === desiredProduct) {
-                let desiredProductPrice: string = await pomanager.homePage.dressPrice.nth(i).innerText();
-                await pomanager.homePage.viewProduct.nth(i).click();
+                let desiredProductPrice: string = await pomanager.products.dressPrice.nth(i).innerText();
+                await pomanager.products.viewProduct.nth(i).click();
                 return desiredProductPrice;
             }
         }

@@ -3,7 +3,8 @@ import { test, expect } from '../../fixtures/baseFixture';
 
 test('write a product review', async ({ page, pomanager }) => {
 
-    await pomanager.homePage.launchApp();
+    await page.goto('/')
+    await pomanager.header.goToProductsScreen();
 
     //navigative to product details page
     let desiredProductPrice = await pomanager.helper.moveToProductDetails(page, pomanager.globalObjects.desiredProduct);

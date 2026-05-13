@@ -10,16 +10,17 @@ export class paymentPage{
     readonly cvc = this.page.locator('input[name="cvc"]');
     readonly expirationMonth = this.page.locator('input[name="expiry_month"]');
     readonly expirationYear =  this.page.locator('input[name="expiry_year"]');
-    readonly makePayment = this.page.getByRole('button', { name: 'Pay and Confirm Order' });
+    readonly submitCardDetail = this.page.getByRole('button', { name: 'Pay and Confirm Order' });
+    readonly orderplacedMessage = this.page.getByText('Your order has been placed successfully!', { exact: true })
 
 
-    async complatePayment(){
-        await this.cardName.fill(ENV_CONFIG.userCName);
-        await this.cardNumber.fill(ENV_CONFIG.userCNumber);
-        await this.cvc.fill(ENV_CONFIG.userCcvc);
-        await this.expirationMonth.fill(ENV_CONFIG.userCexpmonth);
-        await this.expirationYear.fill(ENV_CONFIG.userCexpyear);
-        await this.makePayment.click();
+    async makePayment(){
+        await this.cardName.fill(ENV_CONFIG.User_Cname);
+        await this.cardNumber.fill(ENV_CONFIG.User_Cnumber);
+        await this.cvc.fill(ENV_CONFIG.User_Ccvc);
+        await this.expirationMonth.fill(ENV_CONFIG.User_Cexpmonth);
+        await this.expirationYear.fill(ENV_CONFIG.User_Cexpyear);
+        await this.submitCardDetail.click();
     }
 
     

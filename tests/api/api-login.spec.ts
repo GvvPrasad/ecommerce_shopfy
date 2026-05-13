@@ -2,12 +2,12 @@ import { test, expect, request } from "../../fixtures/baseFixture";
 import { ENV_CONFIG } from '../../config/config.env'
 
 
-const loginPayload: object = { userEmail: ENV_CONFIG.apiUserEmail, userPassword: ENV_CONFIG.apiUserPassword };
+const loginPayload: object = { userEmail: ENV_CONFIG.Api_User_Email, userPassword: ENV_CONFIG.Api_User_Password };
 
 test('Login with API', async ({ request }) => {
 
     // Send POST request of login API
-    const loginResponse = await request.post(ENV_CONFIG.apiBaseUrl + `/api/ecom/auth/login`, { data: loginPayload });
+    const loginResponse = await request.post(ENV_CONFIG.Base_Api_Url + `/api/ecom/auth/login`, { data: loginPayload });
 
     //session storage is saved in json file
     await request.storageState({ path: 'api/session/loginsessionstorage.json' });
@@ -18,7 +18,8 @@ test('Login with API', async ({ request }) => {
     console.log(token);
 
     // Assertions
-    expect(loginResponse.status()).toBe(200);
     expect(token).not.toBeNull();
+    expect(loginResponse.status()).toBe(200);
+    
 
 });
