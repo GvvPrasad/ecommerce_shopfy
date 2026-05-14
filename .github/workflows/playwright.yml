@@ -90,3 +90,20 @@ jobs:
           name: allure-report-final
           path: allure-report/
         # Uploads the merged Allure report as a downloadable artifact
+
+  # ── NEW JOB ──────────────────────────────────────────────────────────────────
+  # Provides a single, stable status check for branch protection rules.
+  # Add "all-shards-passed" in GitHub → Settings → Branches → Status checks.
+  all-shards-passed:
+    needs: playwright-tests
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: All shards passed
+        run: |
+          if [ "${{ needs.playwright-tests.result }}" != "success" ]; then
+            echo "One or more playwright-tests shards failed or were cancelled."
+            exit 1
+          fi
+          echo "All shards passed successfully."
+  # ─────────────────────────────────────────────────────────────────────────────
