@@ -3,6 +3,9 @@ import { test, expect } from '../../fixtures/baseFixture';
 
 test('Validate product details between Home & details page', async ({ page, pomanager }) => {
 
+    await page.goto('/')
+    await pomanager.header.goToProductsScreen();
+
     //move to product detail page
     let desiredProductPrice = await pomanager.helper.moveToProductDetails(page, pomanager.globalObjects.desiredProduct);
 

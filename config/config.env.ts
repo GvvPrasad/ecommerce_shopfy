@@ -1,14 +1,24 @@
-import * as dotenv from 'dotenv';
-import * as path from 'path';
+import * as dotenv from "dotenv";
+import * as path from "path";
 
-const envFile = process.env.ENV ? `.env.${process.env.ENV}` : '.env.qa';
-dotenv.config({ path: path.resolve(__dirname, '../env', envFile) });
+// Load the correct .env file based on ENV
+const environment  = process.env.ENV ? process.env.ENV : "qa";
+const envPath = path.resolve( __dirname, "../env", `.env.${environment}` );
 
-const baseURL = process.env.BASE_URL?.replace(/^['"]|['"]$/g, '');
-const userSignInEmail = process.env.USER_EMAIL;
-const userSignInPassword = process.env.USER_PASSWORD;
+//Load environment variables from file.
+dotenv.config({ path: envPath,});
 
-export const ENV_CONFIG = {
-  baseURL, userSignInEmail, userSignInPassword,
-};
+//clean environment variables. removes extra quotes.
+const removeExtraQuotes = (value: string) => value.replace(/^['"]|['"]$/g, "");
 
+const cleanedConfig = Object.entries(process.env).reduce(
+  (result, [key, value]) => {
+    if (value !== undefined) {
+      result[key] = removeExtraQuotes(value);
+    }
+    return result;
+  },
+  {} as Record<string, string>
+);
+
+export const ENV_CONFIG = cleanedConfig;
