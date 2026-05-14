@@ -15,5 +15,5 @@ test('write a product review', async ({ page, pomanager }) => {
     //validaet success message
     await expect(pomanager.productDetailsPage.successMessage).toBeVisible();
     await expect(pomanager.productDetailsPage.successMessage).toHaveText('Thank you for your review.')
-    await pomanager.productDetailsPage.successMessage.screenshot({path:'success.png'})
+    await pomanager.productDetailsPage.successMessage.screenshot({path:'screenshot/success.png'})
 });

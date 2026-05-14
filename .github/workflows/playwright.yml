@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ] # Run tests when code is pushed to 'main' or 'gvv'
   pull_request:
-    #branches: [ main ] # Run tests on pull requests targeting 'main'
+    #branches: [ main ] # Run tests on pull requests for all branches
 
 jobs:
   playwright-tests:
@@ -17,10 +17,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5 # Pulls your repository code into the runner
+        uses: actions/checkout@v4 # Pulls your repository code into the runner
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v4
         with:
           node-version: lts/* # Installs the latest LTS version of Node.js
 
@@ -37,7 +37,7 @@ jobs:
 
       - name: Upload Playwright Report
         if: always()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v4
         with:
           name: playwright-report-shard-${{ matrix.shard }}
           path: playwright-report/
@@ -45,7 +45,7 @@ jobs:
 
       - name: Upload Allure results
         if: always()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v4
         with:
           name: allure-results-shard-${{ matrix.shard }}
           path: allure-results/
@@ -58,10 +58,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v4
         with:
           node-version: lts/*
 
@@ -69,7 +69,7 @@ jobs:
         run: npm install -g allure-commandline
 
       - name: Download all Allure results
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v4
         with:
           path: allure-results
         # Downloads all shard artifacts into allure-results/
@@ -85,7 +85,7 @@ jobs:
         # Generates the combined Allure HTML report
 
       - name: Upload final Allure report
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v4
         with:
           name: allure-report-final
           path: allure-report/

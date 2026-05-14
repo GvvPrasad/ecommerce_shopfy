@@ -9,6 +9,4 @@ node_modules/
 /allure-results/
 /downloads/
 /api/
-.vscode/
-.github/agents
-.github/workflows/*-steps.yml
+screenshot/
