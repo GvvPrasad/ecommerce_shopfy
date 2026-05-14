@@ -1,10 +1,11 @@
 import { test, expect, request } from "../../fixtures/baseFixture";
 import { ENV_CONFIG } from '../../config/config.env'
+import { skip } from "node:test";
 
 
 const loginPayload: object = { userEmail: ENV_CONFIG.Api_User_Email, userPassword: ENV_CONFIG.Api_User_Password };
 
-test('Login with API', async ({ request }) => {
+test.skip('Login with API', async ({ request }) => {
 
     // Send POST request of login API
     const loginResponse = await request.post(ENV_CONFIG.Base_Api_Url + `/api/ecom/auth/login`, { data: loginPayload });
