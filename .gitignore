@@ -9,4 +9,5 @@ node_modules/
 /allure-results/
 /downloads/
 /api/
-screenshot/
+/screenshot/
+/screenshots/

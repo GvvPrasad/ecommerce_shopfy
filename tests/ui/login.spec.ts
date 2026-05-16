@@ -1,9 +1,9 @@
-import { test, expect } from '../../fixtures/baseFixture';
-import { readExcel } from '../../utils/excel.util';
-import { GlobalObject } from '../../page-objects/globalObjects';
+import { test, expect } from '../../fixtures/base.fixture';
+import { readExcel } from '../../utils/excel.utils';
+import { GlobalObjects } from '../../objects-respo/global-or';
 
-const globalObjects = new GlobalObject();
-const testdata = readExcel(globalObjects.excelFilePath, globalObjects.login) as any[];
+const globalObjects = new GlobalObjects();
+const testdata = readExcel(globalObjects.excelFilePath, globalObjects.loginTestdata) as any[];
 
 testdata.forEach((data: any, index: number) => {
 
@@ -13,7 +13,7 @@ testdata.forEach((data: any, index: number) => {
     test.skip((data.Run).toString().toLowerCase() === 'no');
 
     await page.goto('/')
-    await pomanager.header.goToLoginAndSignUpScreen();
+    await pomanager.header.goToLoginSignUpPage();
     await pomanager.loginSignup.userLogin(data.Email, data.Password);
 
     // Assuming positive case: check if logged in, perhaps by checking logout button visible

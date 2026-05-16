@@ -35,7 +35,7 @@ export default defineConfig({
   use: {
 
      // get base url from config file
-    baseURL: ENV_CONFIG.Base_Url,
+    baseURL: ENV_CONFIG.BASE_URL,
 
     //for max window size
     viewport: {width:1920,height:1080},

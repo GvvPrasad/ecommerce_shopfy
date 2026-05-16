@@ -1,9 +1,9 @@
-import { test, expect } from '../../fixtures/baseFixture';
-import { readExcel } from '../../utils/excel.util';
-import { GlobalObject } from '../../page-objects/globalObjects';
+import { test, expect } from '../../fixtures/base.fixture';
+import { readExcel } from '../../utils/excel.utils';
+import { GlobalObjects } from '../../objects-respo/global-or';
 
-const globalObjects = new GlobalObject();
-const testdata = readExcel(globalObjects.excelFilePath, globalObjects.register) as any[];
+const globalObjects = new GlobalObjects();
+const testdata = readExcel(globalObjects.excelFilePath, globalObjects.registratioTestData) as any[];
 
 testdata.forEach((data: any, index: number) => {
 
@@ -13,7 +13,7 @@ testdata.forEach((data: any, index: number) => {
     test.skip((data.Run).toString().toLowerCase() === 'no');
 
     await page.goto('/')
-    await pomanager.header.goToLoginAndSignUpScreen();
+    await pomanager.header.goToLoginSignUpPage()
     await pomanager.loginSignup.userSignup(data.Name, data.Email);
 
     //existing email error
@@ -25,11 +25,11 @@ testdata.forEach((data: any, index: number) => {
     };
 
     await pomanager.registration.selectGender(data.Gender);
-    await expect(pomanager.registration.name).toHaveValue(data.Name);
-    await expect(pomanager.registration.email).toHaveValue(data.Email);
-    await pomanager.registration.userPassword(data.Password);
+    await expect(pomanager.registration.userName).toHaveValue(data.Name);
+    await expect(pomanager.registration.userEmail).toHaveValue(data.Email);
+    await pomanager.registration.enterUserPassword(data.Password);
     await pomanager.registration.dateOfBirth(data.Day, data.Month, data.Year);
-    await pomanager.registration.fullName(data.FirstName, data.LastName);
+    await pomanager.registration.userFullName(data.FirstName, data.LastName);
     await pomanager.registration.fullAddress(data.Address, data.Address2, data.State, data.City, data.Zipcode, data.Mobile);
     await pomanager.registration.accountCreation();
 

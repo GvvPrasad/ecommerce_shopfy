@@ -6,21 +6,22 @@ export class RegistrationPage {
 
      readonly mr = this.page.getByRole('radio', { name: 'Mr.' });
      readonly mrs = this.page.getByRole('radio', { name: 'Mrs.' });
-     readonly name = this.page.locator('#name');
-     readonly email = this.page.locator('#email');
-     readonly password = this.page.locator('#password');
-     readonly days = this.page.locator('#days');
-     readonly months = this.page.locator('#months');
-     readonly years = this.page.locator('#years');
-     readonly newsletter = this.page.getByLabel('Sign up for our newsletter!');
-     readonly specialoffers = this.page.getByLabel('Receive special offers from our partners!');
+     readonly userName = this.page.locator('#name');
+     readonly userEmail = this.page.locator('#email');
+     readonly userPassword = this.page.locator('#password');
+     readonly dobDays = this.page.locator('#days');
+     readonly dobMonths = this.page.locator('#months');
+     readonly dobYears = this.page.locator('#years');
+     readonly newsLetterCheckBox = this.page.getByLabel('Sign up for our newsletter!');
+     readonly specialOffersCheckBox = this.page.getByLabel('Receive special offers from our partners!');
      readonly firstName = this.page.getByLabel('First name ');
      readonly lastName = this.page.getByLabel('Last name ');
-     readonly address = this.page.locator('#address1');
+     readonly address1 = this.page.locator('#address1');
      readonly address2 = this.page.locator('#address2');
+     readonly country = this.page.locator('#country');
      readonly state = this.page.getByLabel('State ');
      readonly city = this.page.getByLabel('City ');
-     readonly zipcode = this.page.locator('#zipcode');
+     readonly zipCode = this.page.locator('#zipcode');
      readonly mobileNumber = this.page.getByLabel('Mobile Number ');
      readonly createAccount = this.page.getByRole('button', { name: 'Create Account' });
      readonly successMessage = this.page.locator('//h2[@data-qa="account-created"]');
@@ -36,19 +37,19 @@ export class RegistrationPage {
           }
      }
 
-     async userPassword(password?: string) {
+     async enterUserPassword(password?: string) {
           if (password !== undefined) {
-               await this.password.fill(password);
+               await this.userPassword.fill(password);
           }
      }
 
      async dateOfBirth(day: number, month: string, year: number) {
-          await this.days.selectOption({ value: day.toString() });
-          await this.months.selectOption(month);
-          await this.years.selectOption({ value: year.toString() });
+          await this.dobDays.selectOption({ value: day.toString() });
+          await this.dobMonths.selectOption(month);
+          await this.dobYears.selectOption({ value: year.toString() });
      }
 
-     async fullName(fname?: string, lname?: string) {
+     async userFullName(fname?: string, lname?: string) {
           if (fname !== undefined) {
                await this.firstName.fill(fname);
           }
@@ -58,7 +59,7 @@ export class RegistrationPage {
      }
 
      async fullAddress(address1: string, address2: string, state?: string, city?: string, zipcode?: number, mobile?: number) {
-          await this.address.fill(address1);
+          await this.address1.fill(address1);
           await this.address2.fill(address2);
 
           if (state !== undefined) {
@@ -70,7 +71,7 @@ export class RegistrationPage {
           }
 
           if (zipcode !== undefined) {
-               await this.zipcode.fill(`${zipcode}`);
+               await this.zipCode.fill(`${zipcode}`);
           }
 
           if (mobile !== undefined) {
