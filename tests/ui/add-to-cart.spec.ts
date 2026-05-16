@@ -1,16 +1,16 @@
-import { test, expect } from '../../fixtures/baseFixture';
+import { test, expect } from '../../fixtures/base.fixture';
 
 test('Add to cart', async ({ page, pomanager }) => {
 
     await page.goto('/')
-    await pomanager.header.goToProductsScreen();
+    await pomanager.header.goToProductsPage()
 
     //move to product detail page
-    let desiredProductPrice = await pomanager.helper.moveToProductDetails(page, pomanager.globalObjects.desiredProduct);
+    let desiredProductPrice = await pomanager.commonUtility.moveToProductDetailsSections(page, pomanager.globalObjects.desiredProduct);
 
-    await pomanager.helper.addToCart(page, '3')
+    await pomanager.commonUtility.addToCart(page, '3')
 
     //PopUp
-    await pomanager.productDetailsPage.popup.isVisible();
-    await expect(pomanager.productDetailsPage.confirmMessage).toBeVisible();
+    await pomanager.productDetailsPage.modelPopup.isVisible();
+    await expect(pomanager.productDetailsPage.productAddedMessage).toBeVisible();
 });

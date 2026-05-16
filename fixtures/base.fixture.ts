@@ -1,5 +1,5 @@
 import { test as base, expect, Page, request } from '@playwright/test';
-import { PageObjectManager } from '../page-objects/pageObjectManager';
+import { PageObjectManager } from '../objects-respo/pageObjectManager';
 
 type MyFixture = {
   pomanager: PageObjectManager;

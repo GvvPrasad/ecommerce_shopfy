@@ -3,7 +3,7 @@ import * as path from "path";
 
 // Load the correct .env file based on ENV
 const environment  = process.env.ENV ? process.env.ENV : "qa";
-const envPath = path.resolve( __dirname, "../env", `.env.${environment}` );
+const envPath = path.resolve( __dirname, "../environments", `.env.${environment}` );
 
 //Load environment variables from file.
 dotenv.config({ path: envPath,});
