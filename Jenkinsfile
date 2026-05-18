@@ -27,7 +27,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                bat 'npx playwright test --reporter=list'
+                bat 'npx playwright test --reporter=html'
             }
         }
 
