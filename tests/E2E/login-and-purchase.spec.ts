@@ -19,7 +19,7 @@ test('Add to cart', async ({ page, pomanager }) => {
     await pomanager.commonUtility.addToCart(page, '3')
 
     //PopUp
-    await pomanager.productDetailsPage.modelPopup.isVisible();
+    await expect(pomanager.productDetailsPage.modelPopup).toBeVisible();
     await expect(pomanager.productDetailsPage.productAddedMessage).toBeVisible();
 
     //move to cart page
