@@ -40,7 +40,7 @@ pipeline {
 
     post {
         always {
-            junit 'playwright-report/*.xml' // If you generate JUnit XML reports
+            junit 'test-results/results.xml' // If you generate JUnit XML reports
         }
     }
 }
