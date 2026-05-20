@@ -1,19 +1,32 @@
 import { test, expect } from '../../fixtures/base.fixture';
+import { readExcel } from '../../utils/excel.utils';
+import { GlobalObjects } from '../../objects-respo/global-or';
+
+const globalObjects = new GlobalObjects();
+const testdata = readExcel(globalObjects.excelFilePath, globalObjects.reviewTestdata) as any[];
 
 
-test('write a product review', async ({ page, pomanager }) => {
+testdata.forEach((data: any, index: number) => {
 
-    await page.goto('/')
-    await pomanager.header.goToProductsPage()
+    test(`Review for ${data.ProductName}`, async ({ page, pomanager }) => {
+        await page.goto('/')
+        await pomanager.header.goToProductsPage()
 
-    //navigative to product details page
-    let desiredProductPrice = await pomanager.commonUtility.moveToProductDetailsSections(page, pomanager.globalObjects.desiredProduct);
+        //navigative to product details page
+        await pomanager.commonUtility.moveToProductDetailsSections(page, data.ProductName);
 
-    //submit the review
-    await pomanager.productDetailsPage.submitReview('prasad', 'prasad@yopmail.com', 'good');
+        //Enter review
+        await pomanager.productDetailsPage.enterReview(data.Name, data.Email, data.Comments);
+        await pomanager.productDetailsPage.reviewContainer.screenshot({path: `screenshot/reviews_entered_${data.ProductName}.png`})
+       
+        //submit review
+        await pomanager.productDetailsPage.submitReview();
 
-    //validaet success message
-    await expect(pomanager.productDetailsPage.reviewSuccessMessage).toBeVisible();
-    await expect(pomanager.productDetailsPage.reviewSuccessMessage).toHaveText('Thank you for your review.')
-    await pomanager.productDetailsPage.reviewSuccessMessage.screenshot({path:'screenshots/success.png'})
-});
+        //validaet success message
+        await expect(pomanager.productDetailsPage.reviewSuccessMessage).toBeVisible();
+        await expect(pomanager.productDetailsPage.reviewSuccessMessage).toHaveText('Thank you for your review.')
+        await pomanager.productDetailsPage.reviewSuccessMessage.screenshot({ path: `screenshot/${data.ProductName}.png`})
+    })
+})
+
+

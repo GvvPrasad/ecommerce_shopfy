@@ -16,11 +16,13 @@ testdata.forEach((data: any, index: number) => {
     await pomanager.header.goToLoginSignUpPage()
     await pomanager.loginSignup.userSignup(data.Name, data.Email);
 
-    //existing email error
-    if (await pomanager.loginSignup.signupError.isVisible()) {
+
+    if((data.Case).toString().toLowerCase() === "negative"){
+      //existing email error
       // End test here (mark as pass since expected error is shown)
+      await expect(pomanager.loginSignup.signupError).toBeVisible();
       return;
-    } else {
+    }else {
       await expect(page).toHaveURL('/signup');
     };
 
@@ -34,9 +36,10 @@ testdata.forEach((data: any, index: number) => {
     await pomanager.registration.accountCreation();
 
     //check user should be created or not
-    if ((data.Case).toString().toLowerCase() === "Positive") {
+    if ((data.Case).toString().toLowerCase() === "positive") {
       await expect(pomanager.registration.successMessage).toBeVisible();
       await pomanager.registration.continueToHome();
+      await expect(pomanager.header.logout).toBeVisible();
       await pomanager.header.logOut();
     } else {
       await expect(pomanager.registration.successMessage).not.toBeVisible();

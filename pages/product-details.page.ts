@@ -11,6 +11,7 @@ export class ProductDetailsPage {
     readonly productAddedMessage = this.page.locator('.modal-content .modal-title');
     readonly modalViewCart = this.page.locator('.modal-content a');
     readonly modalShopping = this.page.locator('.modal-content button');
+    readonly reviewContainer = this.page.locator('#reviews #review-form');
     readonly reviewerName = this.page.getByPlaceholder('Your Name');
     readonly reviewerEmail = this.page.locator('#email');
     readonly reviewComments = this.page.getByPlaceholder('Add Review Here!');
@@ -33,10 +34,13 @@ export class ProductDetailsPage {
         await this.modalShopping.click();
     }
 
-    async submitReview(rname: string, remail: string, comments: string) {
+    async enterReview(rname: string, remail: string, comments: string) {
         await this.reviewerName.fill(rname);
         await this.reviewerEmail.fill(remail);
         await this.reviewComments.fill(comments)
+    }
+
+    async submitReview(){
         await this.reviewSubmit.click();
     }
 

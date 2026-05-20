@@ -4,7 +4,7 @@ import { PageObjectManager } from '../objects-respo/pageObjectManager';
 export class CommonUtility {
 
     //move to product details page
-    async moveToProductDetailsSections(page: Page, desiredProduct: string): Promise<string | undefined> {
+    async moveToProductDetailsSections(page: Page, desiredProduct: string){
 
         const pomanager = new PageObjectManager(page);
 
@@ -17,7 +17,6 @@ export class CommonUtility {
             if (productName === desiredProduct) {
                 let desiredProductPrice: string = await pomanager.products.dressPrice.nth(i).innerText();
                 await pomanager.products.viewProductButton.nth(i).click();
-                return desiredProductPrice;
             }
         }
     }
