@@ -5,6 +5,7 @@ export class GlobalObjects {
     readonly registratioTestData = 'register';
     readonly loginTestdata = 'login';
     readonly reviewTestdata = 'review';
+    readonly productstestdata =  'products'
     
     //updata tc & delete these
     readonly desiredProduct = 'Stylish Dress'

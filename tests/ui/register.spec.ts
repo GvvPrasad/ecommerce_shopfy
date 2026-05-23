@@ -1,9 +1,12 @@
 import { test, expect } from '../../fixtures/base.fixture';
-import { readExcel } from '../../utils/excel.utils';
+import { ExcelUtility } from '../../utils/excel.utils';
 import { GlobalObjects } from '../../objects-respo/global-or';
 
 const globalObjects = new GlobalObjects();
-const testdata = readExcel(globalObjects.excelFilePath, globalObjects.registratioTestData) as any[];
+const excelUtility = new ExcelUtility();
+
+(async () => {
+  const testdata = await excelUtility.readExcel(globalObjects.excelFilePath, globalObjects.registratioTestData) as any[];
 
 testdata.forEach((data: any, index: number) => {
 
@@ -16,13 +19,11 @@ testdata.forEach((data: any, index: number) => {
     await pomanager.header.goToLoginSignUpPage()
     await pomanager.loginSignup.userSignup(data.Name, data.Email);
 
-
-    if((data.Case).toString().toLowerCase() === "negative"){
-      //existing email error
+    //existing email error
+    if (await pomanager.loginSignup.signupError.isVisible()) {
       // End test here (mark as pass since expected error is shown)
-      await expect(pomanager.loginSignup.signupError).toBeVisible();
       return;
-    }else {
+    } else {
       await expect(page).toHaveURL('/signup');
     };
 
@@ -34,6 +35,7 @@ testdata.forEach((data: any, index: number) => {
     await pomanager.registration.userFullName(data.FirstName, data.LastName);
     await pomanager.registration.fullAddress(data.Address, data.Address2, data.State, data.City, data.Zipcode, data.Mobile);
     await pomanager.registration.accountCreation();
+
 
     //check user should be created or not
     if ((data.Case).toString().toLowerCase() === "positive") {

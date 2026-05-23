@@ -1,27 +1,31 @@
 import { test, expect } from '../../fixtures/base.fixture';
-import { readExcel } from '../../utils/excel.utils';
+import { ExcelUtility } from '../../utils/excel.utils';
 import { GlobalObjects } from '../../objects-respo/global-or';
 
 const globalObjects = new GlobalObjects();
-const testdata = readExcel(globalObjects.excelFilePath, globalObjects.loginTestdata) as any[];
+const excelUtility = new ExcelUtility();
 
-testdata.forEach((data: any, index: number) => {
+(async () => {
+  const testdata = await excelUtility.readExcel(globalObjects.excelFilePath, globalObjects.loginTestdata) as any[];
 
-  test(`login test ${data.Name}`, async ({ page, pomanager }) => {
+  testdata.forEach((data: any, index: number) => {
 
-    //skip the test execution if case type is no
-    test.skip((data.Run).toString().toLowerCase() === 'no');
+    test(`login test ${data.Name}`, async ({ page, pomanager }) => {
 
-    await page.goto('/')
-    await pomanager.header.goToLoginSignUpPage();
-    await pomanager.loginSignup.userLogin(data.Email, data.Password);
+      //skip the test execution if case type is no
+      test.skip((data.Run).toString().toLowerCase() === 'no');
 
-    // Assuming positive case: check if logged in, perhaps by checking logout button visible
-    if ((data.Case).toString().toLowerCase() === "positive") {
-      await expect(pomanager.header.logout).toBeVisible();
-      await pomanager.header.logOut();
-    } else {
-      await expect(pomanager.loginSignup.loginError).toBeVisible();
-    }
+      await page.goto('/');
+      await pomanager.header.goToLoginSignUpPage();
+      await pomanager.loginSignup.userLogin(data.Email, data.Password);
+
+      // Assuming positive case: check if logged in, perhaps by checking logout button visible
+      if ((data.Case).toString().toLowerCase() === 'positive') {
+        await expect(pomanager.header.logout).toBeVisible();
+        await pomanager.header.logOut();
+      } else {
+        await expect(pomanager.loginSignup.loginError).toBeVisible();
+      }
+    });
   });
-});
+})();

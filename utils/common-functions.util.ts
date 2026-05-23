@@ -15,8 +15,8 @@ export class CommonUtility {
         for (let i = 0; i < productcount; i++) {
             let productName = await pomanager.products.dressName.nth(i).innerText();
             if (productName === desiredProduct) {
-                let desiredProductPrice: string = await pomanager.products.dressPrice.nth(i).innerText();
                 await pomanager.products.viewProductButton.nth(i).click();
+                break;
             }
         }
     }
@@ -31,17 +31,28 @@ export class CommonUtility {
     }
 
     //calculate single product total cost
-    async totalSingleProductValue(page: Page) {
+    async totalSingleProductValue(page: Page, desiredProduct:string ) {
         const pomanager = new PageObjectManager(page);
 
-        const rawPrice = await pomanager.cartPage.productPrice.innerText();
+        //get the number of products
+        const productcount = await pomanager.cartPage.cartProductList.count()
 
-        // Remove currency text, commas, spaces, keep digits + decimal
-        const price = Number(rawPrice.replace("Rs.", "").replace(/,/g, "").trim());
+        //loop through the 
+        for (let i = 0; i < productcount; i++) {
+            let addedProductname = await pomanager.cartPage.productName.nth(i).innerText()
+            if (addedProductname !== desiredProduct) {
+                throw new Error(`${addedProductname} is not the desirec product from the list`);
+                break;
+            }else{
+                // get price
+                const productPriceText = await pomanager.cartPage.productPrice.nth(i).innerText();
+                const productPrice =  Number(productPriceText.replace("Rs.", "").replace(/,/g, "").trim());
 
-        const quantityText = await pomanager.cartPage.productQuantity.innerText();
-        const quantity = Number(quantityText.trim());
-        return price * quantity;
+                //check quantity
+                if
+            }
+
+        }
     }
 
 }

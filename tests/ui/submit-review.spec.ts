@@ -1,9 +1,12 @@
 import { test, expect } from '../../fixtures/base.fixture';
-import { readExcel } from '../../utils/excel.utils';
+import { ExcelUtility } from '../../utils/excel.utils';
 import { GlobalObjects } from '../../objects-respo/global-or';
 
 const globalObjects = new GlobalObjects();
-const testdata = readExcel(globalObjects.excelFilePath, globalObjects.reviewTestdata) as any[];
+const excelUtility = new ExcelUtility();
+
+(async () => {
+  const testdata = await excelUtility.readExcel(globalObjects.excelFilePath, globalObjects.reviewTestdata) as any[];
 
 
 testdata.forEach((data: any, index: number) => {

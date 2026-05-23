@@ -7,10 +7,12 @@ export class ProductDetailsPage {
     readonly productPrice = this.page.getByText('Rs.');
     readonly quantity = this.page.locator('#quantity');
     readonly addToCartButton = this.page.getByRole('button', { name: 'Add to cart' })
+    
     readonly modelPopup = this.page.locator('div.modal-content');
     readonly productAddedMessage = this.page.locator('.modal-content .modal-title');
     readonly modalViewCart = this.page.locator('.modal-content a');
     readonly modalShopping = this.page.locator('.modal-content button');
+    
     readonly reviewContainer = this.page.locator('#reviews #review-form');
     readonly reviewerName = this.page.getByPlaceholder('Your Name');
     readonly reviewerEmail = this.page.locator('#email');

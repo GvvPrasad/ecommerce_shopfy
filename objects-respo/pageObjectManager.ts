@@ -2,6 +2,7 @@ import { Page } from '@playwright/test';
 import { GlobalObjects } from '../objects-respo/global-or';
 import { CommonUtility } from '../utils/common-functions.util';
 import { ApiUtility } from '../utils/api.utils'
+import { ExcelUtility } from '../utils/excel.utils'
 
 import { HeaderSection } from '../pages/header-section.page';
 import { LoginSignupPage } from '../pages/login-signup.page';
@@ -21,6 +22,7 @@ export class PageObjectManager {
     readonly globalObjects = new GlobalObjects();
     readonly commonUtility = new CommonUtility();
     readonly apiUtility = new ApiUtility();
+    readonly excelUtility = new ExcelUtility();
 
     readonly header = new HeaderSection(this.page);
     readonly loginSignup = new LoginSignupPage(this.page);
