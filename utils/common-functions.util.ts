@@ -49,7 +49,7 @@ export class CommonUtility {
                 const productPrice =  Number(productPriceText.replace("Rs.", "").replace(/,/g, "").trim());
 
                 //check quantity
-                if
+                //if
             }
 
         }
