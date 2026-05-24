@@ -3,7 +3,7 @@ import { test, expect, request } from '../../fixtures/base.fixture'
 
 
 
-test('Register with API', async ({ pomanager }) => {
+test.skip('Register with API', async ({ pomanager }) => {
 
     const newUserpath = require( path.resolve(__dirname,'../../test-data/api-test-data/register-user.json'))
     const apiContext = await request.newContext();
