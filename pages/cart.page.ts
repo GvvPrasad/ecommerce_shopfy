@@ -5,6 +5,7 @@ export class CartPage{
     constructor (private readonly page:Page){}
 
     readonly checkout = this.page.getByText('Proceed To Checkout');
+    readonly cartProductList = this.page.locator('//tr[contains(@id,"product-")]');
     readonly productName = this.page.locator('.cart_description h4');
     readonly productPrice = this.page.locator('.cart_price p');
     readonly productQuantity = this.page.locator('.cart_quantity button');

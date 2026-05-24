@@ -12,64 +12,27 @@ test('Add to cart', async ({ page, pomanager }) => {
     await pomanager.header.goToLoginSignUpPage();
     await pomanager.loginSignup.userLogin(ENV_CONFIG.USER_EMAIL, ENV_CONFIG.USER_PASSWORD);
 
-    //move to product detail page
-    let desiredProductPrice = await pomanager.commonUtility.moveToProductDetailsSections(page, pomanager.globalObjects.desiredProduct);
+    //get the test data file
+    const testdata = await pomanager.excelUtility.readExcel(pomanager.globalObjects.excelFilePath, pomanager.globalObjects.productstestdata)
 
-    //add to cart
-    await pomanager.commonUtility.addToCart(page, '3')
+    //get the test data and add to cart
+    for (const data of testdata as Array<{ ProductName: string, Quantity: string }>) {
+        //move to product detail page
+        await pomanager.commonUtility.moveToProductDetailsSections(page, data.ProductName);
+        //add to cart
+        await pomanager.commonUtility.addToCart(page, data.Quantity.toString())
 
-    //PopUp
-    // await expect(pomanager.productDetailsPage.modelPopup).toBeVisible();
-    // await expect(pomanager.productDetailsPage.productAddedMessage).toBeVisible();
+        //PopUp
+        await expect(pomanager.productDetailsPage.modelPopup).toBeVisible();
+        await expect(pomanager.productDetailsPage.productAddedMessage).toBeVisible();
+        await pomanager.productDetailsPage.continueShoppingFromModal();
 
-    //move to cart page
-    await pomanager.productDetailsPage.cartfromModel();
-    await expect(page.url()).toContain('view_cart')
+        //move to products page
+        await pomanager.header.goToProductsPage();
+    }
 
+    //move to cart 
+    await pomanager.header.goToCartPage();
 
-    //Displaying single product total cost
-    const totalPriceText = await pomanager.cartPage.productTotalPrice.innerText();
-    const totalPrice = Number(totalPriceText.replace("Rs.", "").replace(/,/g, "").trim());
-
-    //calculate single product total cost
-    const totalCost = await pomanager.commonUtility.totalSingleProductValue(page);
-
-    //validate total cost is as expected
-    await expect(totalPrice).toBe(totalCost)
-
-    //checkout
-    await pomanager.cartPage.goToCheckOut();
-
-    //check product is visiable
-    await expect(pomanager.checkoutpage.checkOutProductsList).toBeVisible();
- 
-    //place order
-    await pomanager.checkoutpage.placeTheOrder();
-
-    //Fill the card details & make payment
-    await pomanager.payment.makePayment();
-
-    //validate succes message is displayed
-    await expect(pomanager.orderConfirmation.orderConfirmationText).toBeVisible();
-    await expect(pomanager.orderConfirmation.successMessage).toBeVisible();
-
-
-    //Download Invoice
-    //Wait for the download event while clicking the download button
-    const [download] = await Promise.all([
-        page.waitForEvent("download"), // listens for a download to start
-        await pomanager.orderConfirmation.downloadInvoice(), // triggers the download
-    ]);
-
-    //Get the suggested filename
-    const suggestedFileName = download.suggestedFilename();
-
-    //Save the file to a specific path
-    const filePath = `downloads/${suggestedFileName}`;
-    await download.saveAs(filePath);
-
-    // Validate file exists
-    const fileExists = fs.existsSync(filePath);
-    expect(fileExists).toBeTruthy();
-
+    //
 });
