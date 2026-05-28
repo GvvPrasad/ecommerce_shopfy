@@ -82,9 +82,4 @@ export class ApiUtility {
         }
         return response;
     }
-
-
-
-
-
 }
